@@ -47,6 +47,11 @@ class User extends Authenticatable
         ];
     }
 
+    // use mutator for password hashing before saving
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 
     public function role()
     {

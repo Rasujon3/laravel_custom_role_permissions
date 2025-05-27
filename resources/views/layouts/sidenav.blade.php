@@ -41,7 +41,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
-    
+
     <h2 class="text-2xl font-bold mb-6"><a href="{{ route('dashboard') }}">Dashboard</a></h2>
     <nav class="space-y-2">
       {{-- @admin --}}
@@ -51,12 +51,12 @@
          class="block p-2 rounded hover:bg-gray-700 {{ request()->routeIs('users.*') ? 'bg-gray-800 text-white' : '' }}">
           Users
       </a>
-  
+
       <a href="{{ route('roles.index') }}"
          class="block p-2 rounded hover:bg-gray-700 {{ request()->routeIs('roles.*') ? 'bg-gray-800 text-white' : '' }}">
           Roles
       </a>
-  
+
       <a href="{{ route('permissions.index') }}"
          class="block p-2 rounded hover:bg-gray-700 {{ request()->routeIs('permissions.*') ? 'bg-gray-800 text-white' : '' }}">
           Permissions
@@ -64,18 +64,18 @@
       {{-- @endadmin --}}
       {{-- @endif --}}
       @endrole
-  
-      
+
+
       <a href="{{ route('posts.index') }}"
          class="block p-2 rounded hover:bg-gray-700 {{ request()->routeIs('posts.*') ? 'bg-gray-800 text-white' : '' }}">
           Posts
       </a>
-      
+
   </nav>
   </div>
 
   <!-- Main Content -->
-    <div class="flex-1 md-64"> 
+    <div class="flex-1 md-64">
     <!-- Header -->
     <header class="bg-white shadow p-4 flex items-center justify-between">
       <button class="md:hidden text-gray-500" onclick="toggleSidebar()">
@@ -85,17 +85,29 @@
       </button>
       <div class="flex items-center justify-between w-full">
         <h1 class="text-xl font-bold">Admin Dashboard - {{ Auth::user()->name }}</h1>
-      
+
         <form action="{{ route('logout') }}" method="post" class="p-3 inline">
             @csrf
             <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow" type="submit">Logout</button>
         </form>
-    
+
       </div>
     </header>
 
     <!-- Pages -->
     <main class="p-6 space-y-12">
+        {{--    show session message, success    --}}
+      @if (session('success'))
+        <div class="bg-green-500 text-white p-4 rounded-lg mb-6 text-center">
+          {{ session('success') }}
+        </div>
+      @endif
+        {{--    show session error message    --}}
+      @if (session('error'))
+        <div class="bg-red-500 text-white p-4 rounded-lg mb-6 text-center">
+          {{ session('error') }}
+        </div>
+      @endif
       @yield('content')
     </main>
   </div>

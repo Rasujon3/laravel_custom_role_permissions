@@ -4,7 +4,12 @@
 @section('content')
 
 <section id="users">
-    <h2 class="text-2xl font-semibold mb-4">Users</h2>
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold">Users</h2>
+        <a href="{{ route('users.create') }}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+            + Create User
+        </a>
+    </div>
 
     <!-- User Listing Table -->
     <div class="bg-white p-6 rounded shadow">
@@ -28,7 +33,7 @@
                 <td class="px-4 py-2 border">{{ $user->role->name ?? '' }}</td>
                 <td class="px-4 py-2 border space-x-2">
                   <a href="{{ route('users.edit', $user->id) }}" class="text-blue-500 hover:underline">Edit</a>
-                  
+
                   <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block">
                     @csrf
                     @method('DELETE')
@@ -37,8 +42,8 @@
                 </td>
               </tr>
             @endforeach
-          
-          
+
+
         </tbody>
       </table>
     </div>
