@@ -29,6 +29,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
+        # return ($user->role && $user->role->name === 'admin') || ($user->role && $user->role->hasPermission('create-post'));
         return $user->role && $user->role->hasPermission('create-post');
     }
 

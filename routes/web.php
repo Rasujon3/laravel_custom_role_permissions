@@ -29,8 +29,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
-    Route::resource('users', UserController::class)->middleware('role:admin,manager');
-    Route::resource('roles', RoleController::class)->middleware('role:admin,manager');
-    Route::resource('permissions', PermissionController::class)->middleware('role:admin,manager');
-    Route::resource('posts', PostController::class);
+    Route::resource('users', UserController::class)->middleware('role:admin');
+    Route::resource('roles', RoleController::class)->middleware('role:admin');
+    Route::resource('permissions', PermissionController::class)->middleware('role:admin');
+    Route::resource('posts', PostController::class)->middleware('role:manager');
 });

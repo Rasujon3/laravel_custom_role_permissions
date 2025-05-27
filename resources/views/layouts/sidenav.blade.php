@@ -46,7 +46,7 @@
     <nav class="space-y-2">
       {{-- @admin --}}
       {{-- @if(Auth::user()->hasRole('admin')) --}}
-      @role('admin', 'manager')
+      @role('admin')
       <a href="{{ route('users.index') }}"
          class="block p-2 rounded hover:bg-gray-700 {{ request()->routeIs('users.*') ? 'bg-gray-800 text-white' : '' }}">
           Users
@@ -65,12 +65,12 @@
       {{-- @endif --}}
       @endrole
 
-
+      @role('manager')
       <a href="{{ route('posts.index') }}"
          class="block p-2 rounded hover:bg-gray-700 {{ request()->routeIs('posts.*') ? 'bg-gray-800 text-white' : '' }}">
           Posts
       </a>
-
+      @endrole
   </nav>
   </div>
 
@@ -96,13 +96,13 @@
 
     <!-- Pages -->
     <main class="p-6 space-y-12">
-        {{--    show session message, success    --}}
+      {{--    show session success message     --}}
       @if (session('success'))
         <div class="bg-green-500 text-white p-4 rounded-lg mb-6 text-center">
           {{ session('success') }}
         </div>
       @endif
-        {{--    show session error message    --}}
+      {{--    show session error message    --}}
       @if (session('error'))
         <div class="bg-red-500 text-white p-4 rounded-lg mb-6 text-center">
           {{ session('error') }}
